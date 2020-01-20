@@ -11,15 +11,22 @@ SplitPath, A_ScriptName, , , , thisscriptname
 ; SetWinDelay, -1 ; Remove short delay done automatically after every windowing command except IfWinActive and IfWinExist
 ; SetKeyDelay, -1, -1 ; Remove short delay done automatically after every keystroke sent by Send or ControlSend
 ; SetMouseDelay, -1 ; Remove short delay done automatically after Click and MouseMove/Click/Drag
-Table:=["Discord","Steam","EpicGamesLauncher","LeagueClient","Netflix"]
-TheTime = %A_Hour%%A_Min%
-MsgBox, "WORKS"
-if(TheTime < 1049 and TheTime > 0745){
-    Loop
-    {
-        For k, v in Table
-            Process, Close, %v%.exe
-        Sleep, 10000 
-    }
-}
+global Table :=[]
+FileReadLine, timer, timer.txt, 1
+FileReadLine, breakTime, timer.txt, 2
 
+NumberOfLoops := timer/10000
+Loop
+{
+    Loop, %NumberOfLoops%
+    {
+        Loop, %0%
+        {
+            param := %A_Index%
+            Process, Close, %param%.exe
+        }
+        sleep, 10000
+    }
+    MsgBox, "5 min break"
+    Sleep, breakTime
+}
