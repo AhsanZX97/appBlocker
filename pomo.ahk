@@ -18,6 +18,7 @@ FileReadLine, breakTime, timer.txt, 2
 NumberOfLoops := timer/10000
 Loop
 {
+    MsgBox, "Timer is on"
     Loop, %NumberOfLoops%
     {
         Loop, %0%
